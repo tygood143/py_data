@@ -12,10 +12,15 @@ user_agent=user_agent,)
 id= 'h7u3ea'
 
 comments = reddit.submission(id=id).comments
+
 #gets rid of more comments button when there are a lot of comments
 comments.replace_more(limit=None)
 comment_list = [i.body for i in comments.list()]
 
+#makes all comments lowercase
+
+comment_list1 = [i.lower() for i in comment_list]
+
 #stores comments in csv
-df = pd.Series(data=comment_list)
+df = pd.Series(data=comment_list1)
 df.to_csv('/Users/tylergood/py_git/py_data/reddit_scraper/comments.csv', index=True, encoding='utf-8')
